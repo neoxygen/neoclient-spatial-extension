@@ -1,0 +1,24 @@
+{
+    "name": "neoxygen/neoclient-spatial-extension",
+    "description": "Neo4j Spatial Extension for NeoClient",
+    "require": {
+        "neoxygen/neoclient": "~2.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.4",
+        "phpspec/phpspec": "~2.1",
+        "bossa/phpspec2-expect": "~1.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christophe Willemsen",
+            "email": "chris@neoxygen.io"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Neoxygen\\NeoClientExtension\\Spatial\\": "src/"
+        }
+    }
+}
