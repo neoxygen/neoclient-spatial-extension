@@ -23,6 +23,9 @@ class SpatialExtension extends AbstractExtension
             ),
             'spatial_find_nodes_within_distance' => array(
                 'class' => 'Neoxygen\NeoClientExtension\Spatial\Command\SpatialFindWithinDistance'
+            ),
+            'spatial_add_simple_point_layer' => array(
+                'class' => 'Neoxygen\NeoClientExtension\Spatial\Command\SpatialCreateSimplePointLayerCommand'
             )
         );
     }
@@ -50,6 +53,14 @@ class SpatialExtension extends AbstractExtension
     public function createSpatialIndex($conn = null)
     {
         $command = $this->invoke('spatial_create_index', $conn);
+        $response = $command->execute();
+
+        return $this->handleHttpResponse($response);
+    }
+
+    public function createSimplePointLayer($conn = null)
+    {
+        $command = $this->invoke('spatial_add_simple_point_layer');
         $response = $command->execute();
 
         return $this->handleHttpResponse($response);
@@ -102,6 +113,7 @@ class SpatialExtension extends AbstractExtension
     {
         $responseFormat = new ResponseFormat();
         $result = new Result();
+        $i = 0;
         foreach ($response->getBody() as $found) {
             $node = new Node($found['metadata']['id'], $found['metadata']['labels'], $found['data']);
             $result->addNode($node);
